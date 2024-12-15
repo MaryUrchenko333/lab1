@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Лабораторная 3</title>
+<style>
+  .error {
+    color: red;
+  }
+</style>
+</head>
+<body>
+
+<h1>Регистрация</h1>
+
+<form id="registrationForm">
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+  <span id="emailError" class="error"></span><br><br>
+
+  <label for="phone">Номер телефона (Россия):</label>
+  <input type="tel" id="phone" name="phone" required><br><br>
+  <span id="phoneError" class="error"></span><br><br>
+
+  <label for="login">Логин:</label>
+  <input type="text" id="login" name="login" required><br><br>
+
+  <label for="age">Возраст:</label>
+  <input type="number" id="age" name="age" min="18" max="90" required><br><br>
+  <span id="ageError" class="error"></span><br><br>
+
+  <button type="submit">Зарегистрироваться</button>
+</form>
+
+<script>
+  const form = document.getElementById('registrationForm');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const ageInput = document.getElementById('age');
+const emailError = document.getElementById('emailError');
+const phoneError = document.getElementById('phoneError');
+const ageError = document.getElementById('ageError');
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); 
+
+  let isValid = true;
+
+  
+  if (!validateEmail(emailInput.value)) {
+    emailError.textContent = 'Некорректный Email';
+    isValid = false;
+  } else {
+    emailError.textContent = '';
+  }
+
+
+  
+  if (!validatePhone(phoneInput.value)) {
+    phoneError.textContent = 'Некорректный номер телефона (Россия)';
+    isValid = false;
+  } else {
+    phoneError.textContent = '';
+  }
+
+  
+  if (!validateAge(ageInput.value)) {
+    ageError.textContent = 'Возраст должен быть от 18 до 90 лет';
+    isValid = false;
+  } else {
+    ageError.textContent = '';
+  }
+
+  if (isValid) {
+    
+    alert('Форма отправлена!');
+  }
+});
+
+function validateEmail(email) {
+  
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validatePhone(phone) {
+  
+  return /^(\+7|7|8)[\- ]?\(?\d{3}\)?[\- ]?\d{3}[\- ]?\d{2}[\- ]?\d{2}$/.test(phone);
+}
+
+function validateAge(age) {
+  const numAge = parseInt(age);
+  return numAge >= 18 && numAge <= 90;
+}
+
+</script>
+
+</body>
+</html>
