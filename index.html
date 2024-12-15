@@ -1,0 +1,42 @@
+
+   
+<!DOCTYPE html>
+<html>
+<head>
+<title>Лабораторная 1</title>
+<style>
+  #myDiv {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    transition: all 0.3s ease; 
+  }
+</style>
+</head>
+<body>
+
+<div id="myButton">Click Me</div>
+<div id="myDiv"></div>
+
+<script>
+  const button = document.getElementById('myButton');
+  const div = document.getElementById('myDiv');
+  let isClicked = false;
+
+  button.addEventListener('click', () => {
+    isClicked = !isClicked; 
+    if (isClicked) {
+      div.style.width = '200px';
+      div.style.height = '200px';
+      div.style.backgroundColor = 'red';
+    } else {
+      div.style.width = '100px';
+      div.style.height = '100px';
+      div.style.backgroundColor = 'blue';
+    }
+  });
+</script>
+
+</body>
+</html>
+
