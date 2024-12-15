@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Лабораторная 2</title>
+<style>
+  table {
+    width: 50%;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  .badge {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название товара</th>
+      <th>Цена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Товар A</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Товар B</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>Товар C</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Товар D</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>Товар E</td>
+      <td>20</td>
+    </tr>
+  </tbody>
+</table>
+
+<button id="categorizeButton">Категоризировать</button>
+<div id="badges"></div>
+
+
+<script>
+  const categorizeButton = document.getElementById('categorizeButton');
+const tableBody = document.querySelector('tbody');
+const badgesDiv = document.getElementById('badges');
+
+categorizeButton.addEventListener('click', () => {
+  const rows = tableBody.querySelectorAll('tr');
+  const categories = {}; 
+
+  rows.forEach(row => {
+    const price = parseInt(row.querySelectorAll('td')[1].textContent); 
+
+    let category;
+    if (price < 15) {
+      category = 'low';
+      row.style.backgroundColor = 'lightgreen';
+    } else if (price < 25) {
+      category = 'medium';
+      row.style.backgroundColor = 'lightyellow';
+    } else {
+      category = 'high';
+      row.style.backgroundColor = 'lightcoral';
+    }
+
+    categories[category] = (categories[category] || 0) + 1; 
+  });
+
+  
+  badgesDiv.innerHTML = '';
+
+  
+  for (const category in categories) {
+    const badge = document.createElement('span');
+    badge.className = 'badge';
+    badge.style.backgroundColor = getCategoryColor(category); 
+    badge.textContent = `${category}: ${categories[category]}`;
+    badgesDiv.appendChild(badge);
+  }
+});
+
+function getCategoryColor(category) {
+  switch (category) {
+    case 'low': return 'lightgreen';
+    case 'medium': return 'lightyellow';
+    case 'high': return 'lightcoral';
+    default: return 'lightgray';
+  }
+}
+
+</script>
+
+</body>
+</html>
