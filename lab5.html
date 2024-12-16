@@ -1,0 +1,56 @@
+npx create-react-app my-react-app --template typescript
+npm install react-bootstrap bootstrap
+import React from 'react';
+import { Card, Container, Row, Col } from 'react-bootstrap';
+
+interface MyComponentProps {}
+
+const MyComponent: React.FC<MyComponentProps> = () => {
+  const data = {
+    title: ,
+    description: ,
+    features: [
+      
+    ]
+  };
+
+  return (
+    <Container>
+      <Row>
+        <Col md={6}>
+          <Card className="mb-4">
+            <Card.Header>{data.title}</Card.Header>
+            <Card.Body>
+              <Card.Text>{data.description}</Card.Text>
+              {data.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col md={6}>
+          {}
+          {}
+          <p></p>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default MyComponent;
+import React from 'react';
+import MyComponent from './MyComponent';
+
+function App() {
+  return (
+    <div>
+      <MyComponent />
+    </div>
+  );
+}
+
+export default App;
+
+npm start
